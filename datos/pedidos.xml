@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedidos>
+  <pedido id="P001" fecha="2026-11-10" estado="pendiente">
+    <cliente>Ana López</cliente>
+    <linea producto="Router AX3000" cantidad="2"/>
+    <linea producto="Cable Cat6" cantidad="5"/>
+  </pedido>
+  <pedido id="P002" fecha="2026-11-11" estado="enviado">
+    <cliente>Luis Martínez</cliente>
+    <linea producto="Switch 8 puertos" cantidad="1"/>
+  </pedido>
+  <pedido id="P003" fecha="2026-11-11" estado="entregado">
+    <cliente>Ana López</cliente>
+    <linea producto="Cable Cat6" cantidad="2"/>
+  </pedido>
+  <pedido id="P004" fecha="2026-11-12" estado="pendiente">
+    <cliente>Carmen Sánchez</cliente>
+    <linea producto="Router AX3000" cantidad="1"/>
+    <linea producto="Switch 8 puertos" cantidad="2"/>
+  </pedido>
+</pedidos>

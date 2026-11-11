@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UT1 · Lenguajes de marcas</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; Lenguajes de marcas y SGI</a><nav><a href="../ut1/" class="on">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">UT 1 · RA1</div><h1>Introducción a los lenguajes de marcas</h1><p>Qué son los lenguajes de marcas y por qué XML es tan estricto.</p></div></div><main><div class="crumb"><a href="../">Inicio</a> › UT1</div>
+<h2>Comprobador de XML bien formado</h2><p>Escribe o pega un documento XML y comprueba si está <strong>bien formado</strong>. Usa el analizador de tu propio navegador, así que los mensajes dependen de él.</p>
+<p><label for="ej"><strong>Ejemplos:</strong></label> <select id="ej" style="width:auto"><option value="0">Documento correcto</option><option value="1">Mal anidado</option><option value="2">Atributo sin comillas</option><option value="3">«<» sin escapar</option><option value="4">Dos elementos raíz</option><option value="5">Mayúsculas distintas</option><option value="6">Prefijo sin declarar</option></select></p>
+<div class="row"><div><textarea id="xml" spellcheck="false"></textarea><p><button class="btn" id="go">Comprobar</button></p></div>
+<div><div class="out" id="res">El resultado aparecerá aquí.</div><div id="arbol"></div></div></div>
+<h2 id="formatos">Los mismos datos en distintos formatos</h2>
+<div class="tabs" id="tabs"><button class="on" data-t="x">XML</button><button data-t="j">JSON</button><button data-t="c">CSV</button><button data-t="h">Tabla HTML</button></div>
+<pre id="fmt"></pre>
+<h2>Figuras</h2><figure><img class="fig" src="f4_arbol.png" alt="Árbol de un documento XML"><figcaption>Un documento XML forma un árbol de elementos, atributos y textos.</figcaption></figure>
+<figure><img class="fig" src="f6_ns.png" alt="Espacios de nombres"><figcaption>Los espacios de nombres distinguen elementos con el mismo nombre local.</figcaption></figure>
+<h2>Descargas</h2><ul><li><a href="../datos/biblioteca.xml" download>biblioteca.xml</a></li><li><a href="../datos/agenda.xml" download>agenda.xml</a></li></ul>
+<script>
+const EJ=["<?xml version=\"1.0\"?>\n<biblioteca>\n  <libro isbn=\"1\">\n    <titulo>Don Quijote</titulo>\n  </libro>\n</biblioteca>", "<a><b></a></b>", "<a x=1/>", "<a>3 < 5</a>", "<a/><b/>", "<a></A>", "<x:a/>"];
+const xml=document.getElementById('xml'),res=document.getElementById('res'),ar=document.getElementById('arbol');
+document.getElementById('ej').onchange=e=>{xml.value=EJ[e.target.value];comprobar()};
+function nodo(n,d){if(n.nodeType==1){let s='  '.repeat(d)+'<'+n.nodeName+'>'+(n.attributes.length?' '+[...n.attributes].map(a=>'@'+a.name+'="'+a.value+'"').join(' '):'')+'\n';for(const c of n.childNodes)s+=nodo(c,d+1);return s}if(n.nodeType==3&&n.textContent.trim())return '  '.repeat(d)+'"'+n.textContent.trim()+'"\n';return ''}
+function comprobar(){const d=new DOMParser().parseFromString(xml.value,'application/xml');const e=d.querySelector('parsererror');
+if(e){res.innerHTML='<span class="err">✘ NO BIEN FORMADO</span>\n'+e.textContent.replace(/</g,'&lt;');ar.innerHTML=''}
+else{res.innerHTML='<span class="ok">✔ Bien formado</span>';ar.innerHTML='<h3>Árbol del documento</h3><pre>'+nodo(d.documentElement,0).replace(/</g,'&lt;')+'</pre>'}}
+document.getElementById('go').onclick=comprobar;xml.value=EJ[0];comprobar();
+const F={x:`<productos>\n  <producto id="1"><nombre>Router</nombre><precio>89.9</precio></producto>\n  <producto id="2"><nombre>Cable</nombre><precio>6.95</precio></producto>\n</productos>`,j:`[\n  {"id": 1, "nombre": "Router", "precio": 89.9},\n  {"id": 2, "nombre": "Cable", "precio": 6.95}\n]`,c:`id,nombre,precio\n1,Router,89.9\n2,Cable,6.95`,h:`<table>\n  <tr><th>id</th><th>nombre</th><th>precio</th></tr>\n  <tr><td>1</td><td>Router</td><td>89.9</td></tr>\n  <tr><td>2</td><td>Cable</td><td>6.95</td></tr>\n</table>`};
+const pre=document.getElementById('fmt');function show(k){pre.textContent=F[k];document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==k))}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>show(b.dataset.t));show('x');
+</script></main>
+<footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

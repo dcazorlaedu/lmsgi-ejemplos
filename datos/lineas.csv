@@ -1,0 +1,7 @@
+pedido;cliente;producto;cantidad
+P001;Ana López;Router AX3000;2
+P001;Ana López;Cable Cat6;5
+P003;Ana López;Cable Cat6;2
+P002;Luis Martínez;Switch 8 puertos;1
+P004;Carmen Sánchez;Router AX3000;1
+P004;Carmen Sánchez;Switch 8 puertos;2

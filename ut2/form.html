@@ -1,0 +1,11 @@
+<!DOCTYPE html><meta charset=utf-8><style>body{font-family:Arial;margin:12px;width:520px}fieldset{border:1px solid #9DC3E6;border-radius:8px}legend{color:#1F4E79;font-weight:bold}
+label{display:block;margin:8px 0 2px;font-size:14px}input,select,textarea{font:inherit;padding:4px;width:100%;box-sizing:border-box}button{margin-top:10px;background:#C9A227;border:0;padding:8px 16px;border-radius:6px}</style>
+<form action="/pedido" method="post"><fieldset><legend>Datos de contacto</legend>
+<label for="n">Nombre</label><input id="n" name="nombre" required placeholder="Ana López">
+<label for="e">Correo electrónico</label><input id="e" type="email" name="email" required placeholder="ana@ejemplo.es">
+<label for="f">Fecha de entrega</label><input id="f" type="date" name="fecha">
+<label for="c">Cantidad (1-10)</label><input id="c" type="number" name="cantidad" min="1" max="10" value="1">
+<label for="p">Producto</label><select id="p" name="producto"><option>Router AX3000</option><option>Switch 8 puertos</option></select>
+<label for="m">Comentarios</label><textarea id="m" name="comentarios" rows="2"></textarea>
+<label><input type="checkbox" name="acepto" required style="width:auto"> Acepto las condiciones</label>
+<button type="submit">Enviar pedido</button></fieldset></form>

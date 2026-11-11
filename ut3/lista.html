@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Lista de la compra</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 420px; margin: 16px auto; }
+  form { display: flex; gap: 6px; }
+  input { flex: 1; padding: 6px; }
+  button { padding: 6px 12px; background: #1F4E79; color: #fff; border: 0; border-radius: 4px; }
+  li { display: flex; justify-content: space-between; padding: 6px 4px; border-bottom: 1px solid #ddd; cursor: pointer; }
+  li.hecho span { text-decoration: line-through; color: #888; }
+  li button { background: #A33B3B; padding: 2px 8px; }
+  #resumen { color: #555; font-size: 14px; }
+</style></head>
+<body>
+  <h1>Lista de la compra</h1>
+  <form id="formulario"><input id="producto" placeholder="Producto" required><button>Añadir</button></form>
+  <ul id="lista"></ul>
+  <p id="resumen"></p>
+<script>
+const form = document.querySelector("#formulario");
+const campo = document.querySelector("#producto");
+const lista = document.querySelector("#lista");
+const resumen = document.querySelector("#resumen");
+
+function actualizarResumen() {
+  const total = lista.children.length;
+  const hechos = lista.querySelectorAll("li.hecho").length;
+  resumen.textContent = `${hechos} de ${total} comprados`;
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();                       // evita recargar la página
+  const texto = campo.value.trim();
+  if (!texto) return;
+  const li = document.createElement("li");
+  const span = document.createElement("span");
+  span.textContent = texto;
+  const borrar = document.createElement("button");
+  borrar.textContent = "Quitar";
+  borrar.dataset.accion = "borrar";
+  li.append(span, borrar);
+  lista.append(li);
+  campo.value = "";
+  actualizarResumen();
+});
+
+lista.addEventListener("click", (e) => {    // delegación de eventos
+  const li = e.target.closest("li");
+  if (!li) return;
+  if (e.target.dataset.accion === "borrar") li.remove();
+  else li.classList.toggle("hecho");
+  actualizarResumen();
+});
+actualizarResumen();
+</script></body></html>

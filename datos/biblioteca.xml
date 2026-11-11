@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+  <libro isbn="978-84-376-0494-7" genero="novela">
+    <titulo>Don Quijote de la Mancha</titulo>
+    <autor>Miguel de Cervantes</autor>
+    <anio>1605</anio>
+    <precio>18.50</precio>
+  </libro>
+  <libro isbn="978-84-206-3463-4" genero="novela">
+    <titulo>La Regenta</titulo>
+    <autor>Leopoldo Alas</autor>
+    <anio>1885</anio>
+    <precio>14.95</precio>
+  </libro>
+  <libro isbn="978-84-376-2000-8" genero="poesia">
+    <titulo>Campos de Castilla</titulo>
+    <autor>Antonio Machado</autor>
+    <anio>1912</anio>
+    <precio>9.90</precio>
+  </libro>
+</biblioteca>

@@ -1,0 +1,16 @@
+<!ELEMENT pedidos (pedido+)>
+<!ELEMENT pedido (cliente, lineas, notas?)>
+<!ATTLIST pedido
+          id     ID                              #REQUIRED
+          fecha  CDATA                           #REQUIRED
+          estado (pendiente|enviado|entregado)   "pendiente">
+<!ELEMENT cliente (nombre, email)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT lineas (linea+)>
+<!ELEMENT linea EMPTY>
+<!ATTLIST linea
+          producto CDATA #REQUIRED
+          cantidad CDATA #REQUIRED
+          precio   CDATA #REQUIRED>
+<!ELEMENT notas (#PCDATA)>

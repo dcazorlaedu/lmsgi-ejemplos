@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UT4 · Lenguajes de marcas</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; Lenguajes de marcas y SGI</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="">UT3</a><a href="../ut4/" class="on">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">UT 4 · RA4</div><h1>Validación de documentos</h1><p>Un esquema es el contrato entre quien envía y quien recibe un documento.</p></div></div><main><div class="crumb"><a href="../">Inicio</a> › UT4</div>
+<div class="tip">Un documento <strong>bien formado</strong> cumple la sintaxis XML; uno <strong>válido</strong> además cumple las reglas de su esquema. Esta tabla viene de validar diez documentos con un error cada uno contra una DTD y un XSD (resultados obtenidos con libxml2).</div>
+<h2>¿Qué detecta cada tecnología?</h2><table><tr><th>Error introducido</th><th>DTD</th><th>XSD</th></tr><tr><td>Falta un elemento obligatorio (cliente)</td><td class="err">No válido</td><td class="err">No válido</td></tr><tr><td>Orden incorrecto de los elementos</td><td class="err">No válido</td><td class="err">No válido</td></tr><tr><td>Falta un atributo obligatorio (fecha)</td><td class="err">No válido</td><td class="err">No válido</td></tr><tr><td>Valor fuera de la lista (estado)</td><td class="err">No válido</td><td class="err">No válido</td></tr><tr><td>Cantidad que no es un número</td><td class="ok">Válido</td><td class="err">No válido</td></tr><tr><td>Cantidad por encima del máximo</td><td class="ok">Válido</td><td class="err">No válido</td></tr><tr><td>Correo con formato incorrecto</td><td class="ok">Válido</td><td class="err">No válido</td></tr><tr><td>Fecha inexistente</td><td class="ok">Válido</td><td class="err">No válido</td></tr><tr><td>Identificador repetido</td><td class="err">No válido</td><td class="err">No válido</td></tr><tr><td>Elemento no declarado</td><td class="err">No válido</td><td class="err">No válido</td></tr></table>
+<p>La DTD deja pasar los errores de <strong>tipo y de valor</strong>; el XSD los detecta todos.</p>
+<figure><img class="fig" src="f1_flujo.png" alt="Validación"><figcaption>El validador compara el documento con su esquema.</figcaption></figure>
+<figure><img class="fig" src="f2_modelo.png" alt="Modelo de contenido"><figcaption>Estructura que describe el esquema de pedidos.</figcaption></figure>
+<h2>Esquema de pedidos (XSD)</h2><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+
+  &lt;!-- Tipos simples propios --&gt;
+  &lt;xs:simpleType name=&quot;estadoTipo&quot;&gt;
+    &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+      &lt;xs:enumeration value=&quot;pendiente&quot;/&gt;
+      &lt;xs:enumeration value=&quot;enviado&quot;/&gt;
+      &lt;xs:enumeration value=&quot;entregado&quot;/&gt;
+    &lt;/xs:restriction&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;emailTipo&quot;&gt;
+    &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+      &lt;xs:pattern value=&quot;[^@\s]+@[^@\s]+\.[a-z]{2,}&quot;/&gt;
+    &lt;/xs:restriction&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;cantidadTipo&quot;&gt;
+    &lt;xs:restriction base=&quot;xs:positiveInteger&quot;&gt;
+      &lt;xs:maxInclusive value=&quot;100&quot;/&gt;
+    &lt;/xs:restriction&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;precioTipo&quot;&gt;
+    &lt;xs:restriction base=&quot;xs:decimal&quot;&gt;
+      &lt;xs:minExclusive value=&quot;0&quot;/&gt;
+      &lt;xs:fractionDigits value=&quot;2&quot;/&gt;
+    &lt;/xs:restriction&gt;
+  &lt;/xs:simpleType&gt;
+
+  &lt;!-- Estructura --&gt;
+  &lt;xs:element name=&quot;pedidos&quot;&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element name=&quot;pedido&quot; maxOccurs=&quot;unbounded&quot;&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name=&quot;cliente&quot;&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:sequence&gt;
+                    &lt;xs:element name=&quot;nombre&quot; type=&quot;xs:string&quot;/&gt;
+                    &lt;xs:element name=&quot;email&quot; type=&quot;emailTipo&quot;/&gt;
+                  &lt;/xs:sequence&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name=&quot;lineas&quot;&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:sequence&gt;
+                    &lt;xs:element name=&quot;linea&quot; maxOccurs=&quot;unbounded&quot;&gt;
+                      &lt;xs:complexType&gt;
+                        &lt;xs:attribute name=&quot;producto&quot; type=&quot;xs:string&quot; use=&quot;required&quot;/&gt;
+                        &lt;xs:attribute name=&quot;cantidad&quot; type=&quot;cantidadTipo&quot; use=&quot;required&quot;/&gt;
+                        &lt;xs:attribute name=&quot;precio&quot; type=&quot;precioTipo&quot; use=&quot;required&quot;/&gt;
+                      &lt;/xs:complexType&gt;
+                    &lt;/xs:element&gt;
+                  &lt;/xs:sequence&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name=&quot;notas&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name=&quot;id&quot; type=&quot;xs:ID&quot; use=&quot;required&quot;/&gt;
+            &lt;xs:attribute name=&quot;fecha&quot; type=&quot;xs:date&quot; use=&quot;required&quot;/&gt;
+            &lt;xs:attribute name=&quot;estado&quot; type=&quot;estadoTipo&quot; default=&quot;pendiente&quot;/&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;</pre><h2>La misma estructura en una DTD</h2><pre>&lt;!ELEMENT pedidos (pedido+)&gt;
+&lt;!ELEMENT pedido (cliente, lineas, notas?)&gt;
+&lt;!ATTLIST pedido
+          id     ID                              #REQUIRED
+          fecha  CDATA                           #REQUIRED
+          estado (pendiente|enviado|entregado)   &quot;pendiente&quot;&gt;
+&lt;!ELEMENT cliente (nombre, email)&gt;
+&lt;!ELEMENT nombre (#PCDATA)&gt;
+&lt;!ELEMENT email (#PCDATA)&gt;
+&lt;!ELEMENT lineas (linea+)&gt;
+&lt;!ELEMENT linea EMPTY&gt;
+&lt;!ATTLIST linea
+          producto CDATA #REQUIRED
+          cantidad CDATA #REQUIRED
+          precio   CDATA #REQUIRED&gt;
+&lt;!ELEMENT notas (#PCDATA)&gt;</pre>
+<h2>Descargas</h2><ul><li><a href="../datos/pedidos_ut4.xsd" download>pedidos_ut4.xsd</a></li><li><a href="../datos/pedidos_ut4.dtd" download>pedidos_ut4.dtd</a></li><li><a href="../datos/pedidos.xml" download>pedidos.xml</a></li></ul>
+<p>Para validar en tu equipo: <code>xmllint --noout --schema pedidos_ut4.xsd tu_documento.xml</code> (el ejemplo del temario usa otro conjunto de pedidos).</p></main>
+<footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

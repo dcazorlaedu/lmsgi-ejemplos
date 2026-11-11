@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+  <producto nombre="Router AX3000" precio="89.90"/>
+  <producto nombre="Cable Cat6" precio="6.95"/>
+  <producto nombre="Switch 8 puertos" precio="34.50"/>
+</productos>

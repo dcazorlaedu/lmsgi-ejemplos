@@ -1,0 +1,54 @@
+:root {
+  --azul: #1f4e79;
+  --claro: #deeaf6;
+  --acento: #c9a227;
+  --radio: 8px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  line-height: 1.5;
+  color: #222;
+}
+.cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  background: var(--azul);
+  color: white;
+}
+.cabecera h1 { margin: 0; font-size: 1.5rem; }
+nav ul { display: flex; gap: 1.2rem; list-style: none; margin: 0; padding: 0; }
+nav a { color: white; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+main { padding: 1.5rem; }
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.tarjeta {
+  border: 1px solid #ccd6e0;
+  border-radius: var(--radio);
+  padding: 1rem;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+.tarjeta:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18); }
+.precio { font-size: 1.3rem; font-weight: bold; color: var(--azul); }
+.boton {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--acento);
+  color: #222;
+  border-radius: var(--radio);
+  text-decoration: none;
+}
+.aviso { background: var(--claro); border-left: 4px solid var(--acento); padding: 0.5rem 1rem; margin-top: 1.5rem; }
+footer { background: #f0f0f0; text-align: center; padding: 1rem; font-size: 0.9rem; }
+@media (max-width: 600px) {
+  .cabecera { flex-direction: column; gap: 0.6rem; }
+  nav ul { flex-wrap: wrap; justify-content: center; }
+}

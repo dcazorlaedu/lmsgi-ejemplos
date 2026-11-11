@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Tipos simples propios -->
+  <xs:simpleType name="estadoTipo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="pendiente"/>
+      <xs:enumeration value="enviado"/>
+      <xs:enumeration value="entregado"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="emailTipo">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^@\s]+@[^@\s]+\.[a-z]{2,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="cantidadTipo">
+    <xs:restriction base="xs:positiveInteger">
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="precioTipo">
+    <xs:restriction base="xs:decimal">
+      <xs:minExclusive value="0"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Estructura -->
+  <xs:element name="pedidos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="pedido" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cliente">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="nombre" type="xs:string"/>
+                    <xs:element name="email" type="emailTipo"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="lineas">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="linea" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="producto" type="xs:string" use="required"/>
+                        <xs:attribute name="cantidad" type="cantidadTipo" use="required"/>
+                        <xs:attribute name="precio" type="precioTipo" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="notas" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+            <xs:attribute name="fecha" type="xs:date" use="required"/>
+            <xs:attribute name="estado" type="estadoTipo" default="pendiente"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

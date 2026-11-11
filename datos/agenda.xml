@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda>
+  <contacto id="c1">
+    <nombre>Ana López</nombre>
+    <telefono>611223344</telefono>
+    <telefono>968123456</telefono>
+    <correo>ana@ejemplo.es</correo>
+  </contacto>
+  <contacto id="c2">
+    <nombre>Luis Martínez</nombre>
+    <telefono>622334455</telefono>
+  </contacto>
+</agenda>

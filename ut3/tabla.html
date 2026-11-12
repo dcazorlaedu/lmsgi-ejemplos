@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabla ordenable y filtrable · Lenguajes de marcas</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"><style>textarea,input[type=text]{width:100%;font-family:ui-monospace,monospace}.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}.chip{display:inline-block;border-radius:999px;padding:.1rem .7rem;margin:.15rem;font-size:.85rem}.ok{background:#d8f0dd;color:#14532d}.ko{background:#f6d4d4;color:#7a1f1f}table.t{border-collapse:collapse}table.t th,table.t td{border:1px solid var(--borde);padding:.3rem .8rem}table.t th{background:var(--claro);cursor:pointer}</style></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; Lenguajes de marcas y SGI</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="on">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">UT 3 · Demo</div><h1>Tabla ordenable y filtrable</h1><p>Práctica guiada: ordenar al pulsar la cabecera y filtrar al escribir.</p></div></div><main>
+<div class="crumb"><a href="../">Inicio</a> › <a href="./">UT3</a> › Tabla ordenable y filtrable</div>
+<p>Pulsa una cabecera para ordenar (otra vez para invertir) y escribe para filtrar por nombre.</p>
+<input type="text" id="q" placeholder="Filtrar por nombre…" style="max-width:320px"> <span id="cuenta"></span>
+<table class="t" id="t"><thead><tr><th data-k="n">Producto ↕</th><th data-k="c">Categoría ↕</th><th data-k="p">Precio ↕</th><th data-k="s">Stock ↕</th></tr></thead><tbody></tbody></table>
+<script>
+const datos=[{n:'Casco urbano',c:'Seguridad',p:39.9,s:8},{n:'Luz LED',c:'Iluminación',p:12.5,s:0},{n:'Candado U',c:'Seguridad',p:24,s:5},{n:'Timbre',c:'Accesorios',p:6.5,s:30},{n:'Cámara 29"',c:'Ruedas',p:11.2,s:14},{n:'Bomba de pie',c:'Herramientas',p:18,s:3}];
+let orden={k:'n',asc:true};const tb=document.querySelector('#t tbody'),q=document.getElementById('q');
+function pintar(){const t=q.value.toLowerCase();const f=datos.filter(x=>x.n.toLowerCase().includes(t)).sort((a,b)=>(a[orden.k]>b[orden.k]?1:-1)*(orden.asc?1:-1));
+tb.replaceChildren(...f.map(x=>{const tr=document.createElement('tr');for(const v of [x.n,x.c,x.p.toFixed(2)+' €',x.s]){const td=document.createElement('td');td.textContent=v;tr.append(td)}if(x.s===0)tr.style.color='#a33b3b';return tr}));
+document.getElementById('cuenta').textContent=f.length+' de '+datos.length+' productos'}
+document.querySelector('thead').addEventListener('click',e=>{const k=e.target.dataset.k;if(!k)return;orden={k,asc:orden.k===k?!orden.asc:true};pintar()});
+q.addEventListener('input',pintar);pintar();
+</script>
+</main><footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

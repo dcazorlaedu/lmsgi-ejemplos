@@ -19,5 +19,5 @@ document.getElementById('reset').onclick=reset;
 document.getElementById('run').onclick=()=>{const w=fr.contentWindow;const log=[];w.console.log=(...a)=>log.push(a.map(x=>typeof x==='object'?JSON.stringify(x):String(x)).join(' '));
 try{w.eval(js.value)}catch(e){log.push('ERROR: '+e.name+': '+e.message)}con.textContent=log.join('\n')||'(sin salida)'};
 js.value=SN['Seleccionar'];reset();
-</script></main>
+</script><h2>Más demos interactivas</h2><ul class="demos"><li><a href="tabla.html"><strong>Tabla ordenable y filtrable</strong></a> — ordenar y filtrar con JavaScript.</li><li><a href="eventos.html"><strong>Propagación de eventos</strong></a> — captura, burbujeo y stopPropagation.</li></ul><!--/demos--></main>
 <footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

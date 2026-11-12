@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propagación de eventos · Lenguajes de marcas</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"><style>textarea,input[type=text]{width:100%;font-family:ui-monospace,monospace}.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}.chip{display:inline-block;border-radius:999px;padding:.1rem .7rem;margin:.15rem;font-size:.85rem}.ok{background:#d8f0dd;color:#14532d}.ko{background:#f6d4d4;color:#7a1f1f}table.t{border-collapse:collapse}table.t th,table.t td{border:1px solid var(--borde);padding:.3rem .8rem}table.t th{background:var(--claro);cursor:pointer}</style></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; Lenguajes de marcas y SGI</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="on">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">UT 3 · Demo</div><h1>Propagación de eventos</h1><p>Mira cómo viaja un clic: captura y burbujeo.</p></div></div><main>
+<div class="crumb"><a href="../">Inicio</a> › <a href="./">UT3</a> › Propagación de eventos</div>
+<p>Pulsa el botón interior. Se registra el orden en el que se ejecutan los manejadores y puedes activar la captura o detener la propagación.</p>
+<label><input type="checkbox" id="cap"> Escuchar en fase de <strong>captura</strong></label> · <label><input type="checkbox" id="stop"> <code>stopPropagation()</code> en el nivel «padre»</label> · <button class="btn sec" id="clr">Borrar registro</button>
+<div id="abuelo" style="padding:1rem;background:#DEEAF6;border:2px solid #2E75B6;border-radius:10px;margin:1rem 0;color:#1d2733">abuelo<div id="padre" style="padding:1rem;background:#F4D58D;border:2px solid #C9A227;border-radius:10px;margin:.6rem 0">padre<div style="margin-top:.5rem"><button class="btn" id="hijo">hijo (pulsa aquí)</button></div></div></div>
+<pre id="log" style="min-height:90px">Registro vacío</pre>
+<script>
+const log=document.getElementById('log');let n=0;
+function reg(id,e){n++;log.textContent=(log.textContent==='Registro vacío'?'':log.textContent+'\n')+n+'. '+id+'  (fase: '+['','captura','objetivo','burbujeo'][e.eventPhase]+')  target='+e.target.id}
+for(const id of ['abuelo','padre','hijo']){document.getElementById(id).addEventListener('click',e=>reg(id,e),false);}
+const fase=()=>document.getElementById('cap').checked;
+for(const id of ['abuelo','padre']){document.getElementById(id).addEventListener('click',e=>{if(fase())reg(id+' (captura)',e)},true)}
+document.getElementById('padre').addEventListener('click',e=>{if(document.getElementById('stop').checked){e.stopPropagation();reg('padre → stopPropagation',e)}},false);
+document.getElementById('clr').onclick=()=>{log.textContent='Registro vacío';n=0};
+</script>
+</main><footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

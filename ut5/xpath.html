@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probador de XPath · Lenguajes de marcas</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"><style>textarea,input[type=text]{width:100%;font-family:ui-monospace,monospace}.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}.chip{display:inline-block;border-radius:999px;padding:.1rem .7rem;margin:.15rem;font-size:.85rem}.ok{background:#d8f0dd;color:#14532d}.ko{background:#f6d4d4;color:#7a1f1f}table.t{border-collapse:collapse}table.t th,table.t td{border:1px solid var(--borde);padding:.3rem .8rem}table.t th{background:var(--claro);cursor:pointer}</style></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; Lenguajes de marcas y SGI</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="on">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="">UT7</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">UT 5 · Demo</div><h1>Probador de XPath</h1><p>Evalúa expresiones XPath 1.0 sobre un documento XML, con el motor del navegador.</p></div></div><main>
+<div class="crumb"><a href="../">Inicio</a> › <a href="./">UT5</a> › Probador de XPath</div>
+<p>Escribe una expresión XPath y mira el resultado. El navegador implementa XPath 1.0 (no incluye las funciones de XPath 2.0/3.1 como <code>distinct-values</code>).</p>
+<p><label><strong>Ejemplo:</strong> <select id="ej" style="width:auto"></select></label></p>
+<div class="row2"><div><label><strong>Documento XML</strong></label><textarea id="xml" rows="16" spellcheck="false"></textarea></div>
+<div><label><strong>Expresión XPath</strong></label><input type="text" id="xp"><p><button class="btn" id="go">Evaluar</button></p><div class="out" id="res" style="min-height:120px;white-space:pre-wrap"></div></div></div>
+<script>
+const XML=`<club>
+  <salida id="s1" dificultad="media"><ruta>Sierra Espuña</ruta><km>12</km><libres>4</libres><guia>Marta</guia></salida>
+  <salida id="s2" dificultad="baja"><ruta>Cabo Cope</ruta><km>9</km><libres>0</libres><guia>Pedro</guia></salida>
+  <salida id="s3" dificultad="alta"><ruta>Sierra de la Pila</ruta><km>16</km><libres>7</libres><guia>Marta</guia></salida>
+  <salida id="s4" dificultad="media"><ruta>Calblanque</ruta><km>14</km><libres>11</libres><guia>Lucía</guia></salida>
+</club>`;
+const EJ=[['Todas las rutas','//ruta'],['Dificultad alta o media','//salida[@dificultad="alta" or @dificultad="media"]/ruta'],['Más de 12 km','//salida[km > 12]/ruta/text()'],['Segunda salida','/club/salida[2]/ruta'],['Última salida','/club/salida[last()]/ruta'],['Con plazas libres (ids)','//salida[libres > 0]/@id'],['Guía de Cabo Cope','//ruta[.="Cabo Cope"]/following-sibling::guia'],['Cuántas salidas','count(//salida)'],['Suma de km','sum(//km)'],['Salidas de Marta','//salida[guia="Marta"]/ruta/text()'],['Texto que contiene «Sierra»','//ruta[contains(., "Sierra")]'],['Padre de un nodo','//km[. = 16]/parent::salida/@id']];
+const xml=document.getElementById('xml'),xp=document.getElementById('xp'),res=document.getElementById('res'),sel=document.getElementById('ej');
+sel.innerHTML=EJ.map((e,i)=>`<option value="${i}">${e[0]}</option>`).join('');xml.value=XML;
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function evaluar(){const d=new DOMParser().parseFromString(xml.value,'application/xml');if(d.querySelector('parsererror')){res.innerHTML='<span class="err">✘ XML mal formado</span>';return}
+try{const r=d.evaluate(xp.value,d,null,XPathResult.ANY_TYPE,null);
+if(r.resultType===XPathResult.NUMBER_TYPE)res.textContent='Número: '+r.numberValue;
+else if(r.resultType===XPathResult.STRING_TYPE)res.textContent='Cadena: '+r.stringValue;
+else if(r.resultType===XPathResult.BOOLEAN_TYPE)res.textContent='Booleano: '+r.booleanValue;
+else{const out=[];let n;while(n=r.iterateNext())out.push(n.nodeType===2?'@'+n.name+'="'+n.value+'"':n.nodeType===3?'"'+n.textContent+'"':new XMLSerializer().serializeToString(n));res.innerHTML='<span class="ok">✔ '+out.length+' nodo(s)</span>\n'+esc(out.join('\n'))}}
+catch(e){res.innerHTML='<span class="err">✘ '+esc(e.message)+'</span>'}}
+sel.onchange=()=>{xp.value=EJ[sel.value][1];evaluar()};document.getElementById('go').onclick=evaluar;xp.onkeydown=e=>{if(e.key==='Enter')evaluar()};
+xp.value=EJ[0][1];evaluar();
+</script>
+</main><footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

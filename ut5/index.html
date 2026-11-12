@@ -25,5 +25,5 @@ const xsl=document.getElementById('xsl');xsl.value=XSL;
 function tr(){const m=document.getElementById('tmsg');try{const s=new DOMParser().parseFromString(xsl.value,'application/xml');if(s.querySelector('parsererror')){m.innerHTML='<span class="err">La hoja no está bien formada</span>\n'+s.querySelector('parsererror').textContent;return}
 const p=new XSLTProcessor();p.importStylesheet(s);const f=p.transformToFragment(xd,document);const w=document.getElementById('tout').contentDocument;w.open();w.write('<!DOCTYPE html><meta charset=utf-8>');w.write(new XMLSerializer().serializeToString(f));w.close();m.innerHTML='<span class="ok">✔ Transformación realizada</span>'}catch(e){m.innerHTML='<span class="err">ERROR</span> '+e.message}}
 document.getElementById('tgo').onclick=tr;tr();
-</script></main>
+</script><h2>Más demos interactivas</h2><ul class="demos"><li><a href="xpath.html"><strong>Probador de XPath</strong></a> — evalúa expresiones sobre tu propio XML.</li></ul><!--/demos--></main>
 <footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

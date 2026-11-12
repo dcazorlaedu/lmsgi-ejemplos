@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seguridad: contraseñas y roles · Lenguajes de marcas</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/site.css"><style>textarea,input[type=text]{width:100%;font-family:ui-monospace,monospace}.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}.chip{display:inline-block;border-radius:999px;padding:.1rem .7rem;margin:.15rem;font-size:.85rem}.ok{background:#d8f0dd;color:#14532d}.ko{background:#f6d4d4;color:#7a1f1f}table.t{border-collapse:collapse}table.t th,table.t td{border:1px solid var(--borde);padding:.3rem .8rem}table.t th{background:var(--claro);cursor:pointer}</style></head><body>
+<header class="top"><div class="in"><a class="logo" href="../">&lt;/&gt; Lenguajes de marcas y SGI</a><nav><a href="../ut1/" class="">UT1</a><a href="../ut2/" class="">UT2</a><a href="../ut3/" class="">UT3</a><a href="../ut4/" class="">UT4</a><a href="../ut5/" class="">UT5</a><a href="../ut6/" class="">UT6</a><a href="../ut7/" class="on">UT7</a></nav></div></header>
+<div class="hero"><div class="in"><div class="badge">UT 7 · Demo</div><h1>Seguridad: contraseñas y roles</h1><p>Política de contraseñas y matriz de permisos con registro de auditoría.</p></div></div><main>
+<div class="crumb"><a href="../">Inicio</a> › <a href="./">UT7</a> › Seguridad: contraseñas y roles</div>
+<h2>Política de contraseñas</h2><p>Escribe una contraseña (no se envía a ningún sitio) y comprueba si cumple una política habitual: 12 caracteres, mayúscula, número y símbolo.</p>
+<input type="text" id="pw" placeholder="Prueba: Huerta#2026-segura" autocomplete="off"><div id="pol" style="margin:.5rem 0"></div>
+<h2>Roles y permisos</h2><p>Elige un rol, un recurso y una acción: se comprueba contra la matriz y queda anotado en el registro de auditoría.</p>
+<div class="row2"><div><label>Rol <select id="rol" style="width:auto"><option>comercial</option><option>almacen</option><option>contabilidad</option><option>direccion</option></select></label>
+<label>Recurso <select id="rec" style="width:auto"><option>pedido</option><option>cliente</option><option>stock</option><option>factura</option><option>informe</option></select></label>
+<label>Acción <select id="acc" style="width:auto"><option>leer</option><option>crear</option><option>editar</option></select></label> <button class="btn" id="chk">Comprobar</button></div>
+<div><pre id="aud" style="min-height:130px">Registro de auditoría vacío</pre></div></div>
+<h3>Matriz de permisos</h3><div id="mat"></div>
+<script>
+const P={comercial:{pedido:['crear','leer'],cliente:['leer','editar'],factura:['leer']},almacen:{pedido:['leer'],stock:['leer','editar']},contabilidad:{factura:['crear','leer','editar'],pedido:['leer'],informe:['leer']},direccion:{informe:['leer'],pedido:['leer'],factura:['leer']}};
+const pw=document.getElementById('pw');pw.oninput=()=>{const p=pw.value;const r=[['≥ 12 caracteres',p.length>=12],['una mayúscula',/[A-Z]/.test(p)],['un número',/[0-9]/.test(p)],['un símbolo',/[^A-Za-z0-9]/.test(p)]];document.getElementById('pol').innerHTML=r.map(([t,o])=>`<span class="chip ${o?'ok':'ko'}">${o?'✔':'✘'} ${t}</span>`).join('')};pw.oninput();
+const aud=document.getElementById('aud');let reg=[];
+document.getElementById('chk').onclick=()=>{const [r,c,a]=['rol','rec','acc'].map(i=>document.getElementById(i).value);const ok=(P[r][c]||[]).includes(a);reg.push(new Date().toLocaleTimeString()+' | '+r+' | '+a+' '+c+' | '+(ok?'PERMITIDO':'DENEGADO'));aud.textContent=reg.slice(-8).join('\n')};
+const recs=['pedido','cliente','stock','factura','informe'];
+document.getElementById('mat').innerHTML='<table class="t"><tr><th>Rol</th>'+recs.map(r=>'<th>'+r+'</th>').join('')+'</tr>'+Object.keys(P).map(r=>'<tr><td><strong>'+r+'</strong></td>'+recs.map(c=>'<td>'+((P[r][c]||[]).join(', ')||'—')+'</td>').join('')+'</tr>').join('')+'</table>';
+</script>
+</main><footer>Material didáctico de Lenguajes de marcas y sistemas de gestión de información · 1.º DAW · Todos los datos de los ejemplos son ficticios.</footer></body></html>

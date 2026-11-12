@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+  <aceite id="a1" eco="no" existencias="120"><nombre>Picual</nombre><formato>500 ml</formato><precio>8.90</precio></aceite>
+  <aceite id="a2" eco="no" existencias="85"><nombre>Arbequina</nombre><formato>500 ml</formato><precio>9.50</precio></aceite>
+  <aceite id="a3" eco="no" existencias="40"><nombre>Picual</nombre><formato>1 l</formato><precio>15.80</precio></aceite>
+  <aceite id="a4" eco="si" existencias="15"><nombre>Ecológico</nombre><formato>1 l</formato><precio>24.00</precio></aceite>
+  <aceite id="a5" eco="si" existencias="0"><nombre>Ecológico</nombre><formato>5 l</formato><precio>98.00</precio></aceite>
+</catalogo>

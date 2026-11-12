@@ -1,0 +1,562 @@
+{
+ "unidad": {
+  "1": {
+   "ra": [
+    "RA1"
+   ],
+   "nombre": "Introducción a los lenguajes de marcas"
+  },
+  "2": {
+   "ra": [
+    "RA2"
+   ],
+   "nombre": "Transmisión y presentación de información: HTML5, CSS y sindicación"
+  },
+  "3": {
+   "ra": [
+    "RA3"
+   ],
+   "nombre": "Acceso y manipulación de documentos web con JavaScript"
+  },
+  "4": {
+   "ra": [
+    "RA4"
+   ],
+   "nombre": "Validación de documentos: DTD, XML Schema y RELAX NG"
+  },
+  "5": {
+   "ra": [
+    "RA5"
+   ],
+   "nombre": "Conversiones sobre documentos: XPath, XSLT y XQuery"
+  },
+  "6": {
+   "ra": [
+    "RA6"
+   ],
+   "nombre": "Almacenamiento y consulta: XML, JSON, SQL y bases de datos nativas"
+  },
+  "7": {
+   "ra": [
+    "RA7"
+   ],
+   "nombre": "Sistemas empresariales de gestión de información"
+  }
+ },
+ "ra_texto": {
+  "RA1": "Reconoce las características de lenguajes de marcas analizando e interpretando fragmentos de código.",
+  "RA2": "Utiliza lenguajes de marcas para la transmisión y presentación de información a través de la web analizando la estructura de los documentos e identificando sus elementos.",
+  "RA3": "Accede y manipula documentos web utilizando lenguajes de script de cliente.",
+  "RA4": "Establece mecanismos de validación de documentos para el intercambio de información utilizando métodos para definir su sintaxis y estructura.",
+  "RA5": "Realiza conversiones sobre documentos para el intercambio de información utilizando técnicas, lenguajes y herramientas de procesamiento.",
+  "RA6": "Gestiona la información en formatos de intercambio de datos analizando y utilizando tecnologías de almacenamiento y lenguajes de consulta.",
+  "RA7": "Opera sistemas empresariales de gestión de información realizando tareas de importación, integración, aseguramiento y extracción de la información."
+ },
+ "ce_esperados": {
+  "RA1": "abcdefghi",
+  "RA2": "abcdefghij",
+  "RA3": "abcdef",
+  "RA4": "abcdefg",
+  "RA5": "abcdefg",
+  "RA6": "abcdefghi",
+  "RA7": "abcdefghi"
+ },
+ "ejercicios": [
+  {
+   "ut": 1,
+   "dificultad": 1,
+   "titulo": "Qué es un lenguaje de marcas",
+   "contexto": "La almazara cooperativa «Sierra Espuña» (ficticia) vende aceite de oliva virgen extra y quiere digitalizar su información. Antes de empezar a escribir documentos necesitas entender el concepto.",
+   "tareas": [
+    "Define con tus palabras «lenguaje de marcas» y enumera tres características generales. Señala una marca en el fragmento `<aceite>Picual</aceite>`.",
+    "Enumera tres ventajas de guardar la información en un formato de marcas frente a una hoja de cálculo para intercambiarla con distribuidores.",
+    "Clasifica HTML, XML, XHTML, SVG, RSS, Markdown y LaTeX (marcas de presentación, de procedimientos o descriptivas) e indica cuáles son realmente lenguajes de marcas.",
+    "Asocia cada lenguaje con su ámbito (web, sindicación, gráficos vectoriales, ofimática, documentación) y razona cuándo usarías uno de propósito general como XML."
+   ],
+   "entrega": "Un documento de una página con las cuatro respuestas.",
+   "ce": [
+    "RA1:a",
+    "RA1:b",
+    "RA1:c",
+    "RA1:d",
+    "RA1:e"
+   ],
+   "pista": "Piensa qué describe cada marca: la estructura/significado del contenido o su aspecto.",
+   "aceptacion": [
+    "Las tres características son correctas (texto plano, marcas, separación contenido/presentación).",
+    "La clasificación distingue marcas de presentación, de procedimientos y descriptivas.",
+    "Se explica por qué XML es un metalenguaje."
+   ],
+   "ampliacion": [
+    "Busca qué formato usa un documento `.docx` por dentro (descomprímelo) y qué lenguaje de marcas contiene."
+   ],
+   "id": "01_ejercicio_UT1"
+  },
+  {
+   "ut": 1,
+   "dificultad": 2,
+   "titulo": "Un XML bien formado",
+   "contexto": "La almazara cooperativa «Sierra Espuña» (ficticia) vende aceite de oliva virgen extra y quiere digitalizar su información. Te llega el catálogo de productos con varios fallos de sintaxis.",
+   "tareas": [
+    "Identifica en `material/aceites_mal.xml` la estructura del documento (prólogo, raíz, elementos, atributos, texto, comentarios) y las reglas sintácticas que incumple.",
+    "Corrige el documento hasta que un analizador (`xmllint --noout`) lo acepte. Anota el mensaje de cada error antes de corregirlo.",
+    "Explica por qué un procesador debe rechazar un documento mal formado en lugar de «adivinar» lo que quería decir.",
+    "Escapa correctamente en XML el texto `Aceite «Premium» & Cía <0,4%>` de dos formas (entidades y CDATA)."
+   ],
+   "entrega": "`aceites_ok.xml` y una lista de los errores con la regla incumplida.",
+   "ce": [
+    "RA1:g",
+    "RA1:h"
+   ],
+   "pista": "Los errores de sintaxis suelen estar en etiquetas sin cerrar, comillas, mayúsculas y caracteres reservados.",
+   "aceptacion": [
+    "`xmllint --noout aceites_ok.xml` no muestra errores.",
+    "Cada error está asociado a una regla (un solo raíz, cierre, comillas, anidamiento, caracteres reservados).",
+    "Se muestran las dos formas de escapar."
+   ],
+   "id": "02_ejercicio_UT1"
+  },
+  {
+   "ut": 1,
+   "dificultad": 3,
+   "titulo": "Dos vocabularios en un mismo documento",
+   "contexto": "La almazara cooperativa «Sierra Espuña» (ficticia) vende aceite de oliva virgen extra y quiere digitalizar su información. El documento de pedidos mezcla datos de la almazara y datos de la empresa de transportes, y ambos usan el elemento `<nombre>`.",
+   "tareas": [
+    "Analiza `material/pedido_mezclado.xml` y explica qué problema provoca tener dos elementos `<nombre>` con significados distintos.",
+    "Resuélvelo con espacios de nombres (URI y prefijos) sin cambiar los nombres de los elementos y comprueba que sigue bien formado.",
+    "Compara HTML y XML con el mismo contenido (ficha de un producto): qué tolera uno y no el otro, y qué aporta cada uno.",
+    "Selecciona con XPath solo los `nombre` del vocabulario de transporte aprovechando el espacio de nombres."
+   ],
+   "entrega": "El XML corregido, la comparación HTML/XML y la expresión XPath.",
+   "ce": [
+    "RA1:f",
+    "RA1:i"
+   ],
+   "pista": "Lo que identifica un vocabulario es la URI, no el prefijo.",
+   "aceptacion": [
+    "Los dos `nombre` pertenecen a URI distintas.",
+    "El documento está bien formado.",
+    "El XPath devuelve solo los nombres del transportista."
+   ],
+   "id": "03_ejercicio_UT1"
+  },
+  {
+   "ut": 2,
+   "dificultad": 1,
+   "titulo": "Estándares web y estructura de una página",
+   "contexto": "La almazara cooperativa «Sierra Espuña» (ficticia) vende aceite de oliva virgen extra y quiere digitalizar su información. Vas a crear su web corporativa.",
+   "tareas": [
+    "Clasifica HTML, XHTML, CSS, SVG y RSS según quién los estandariza y su versión actual. Explica qué es un *living standard*.",
+    "Compara HTML 4.01, XHTML 1.0 y HTML5 (doctype, etiquetas semánticas, multimedia, formularios).",
+    "Crea la estructura de `index.html` con `doctype`, `lang`, `meta charset`, `viewport`, `header`, `nav`, `main`, `section`, `article` y `footer` e identifica cada sección en el árbol del documento."
+   ],
+   "entrega": "`index.html` y una tabla comparativa de versiones.",
+   "ce": [
+    "RA2:a",
+    "RA2:b",
+    "RA2:d"
+   ],
+   "pista": "Si dudas de una etiqueta, el documento correcto se valida en validator.w3.org.",
+   "aceptacion": [
+    "La página tiene estructura semántica y se muestra sin errores de análisis.",
+    "La tabla compara al menos tres aspectos entre versiones."
+   ],
+   "id": "04_ejercicio_UT2"
+  },
+  {
+   "ut": 2,
+   "dificultad": 2,
+   "titulo": "Contenido, enlaces y formularios",
+   "contexto": "La web de la almazara debe mostrar productos, un plano y un formulario de pedido.",
+   "tareas": [
+    "Añade: un enlace externo seguro (`rel`), una imagen accesible, una lista de productos, una tabla de precios con cabecera y un formulario con campos de texto, correo, número y selección.",
+    "Explica la función de cada etiqueta y de los atributos principales que has usado (`href`, `src`, `alt`, `name`, `required`, `type`).",
+    "Usa herramientas del editor y del navegador (Emmet, Live Server, DevTools) y anota qué te ha facilitado cada una."
+   ],
+   "entrega": "La página `productos.html` y las notas sobre herramientas.",
+   "ce": [
+    "RA2:c",
+    "RA2:e"
+   ],
+   "pista": "Emmet permite escribir estructuras como `ul>li*3`.",
+   "aceptacion": [
+    "El HTML valida sin errores.",
+    "Las imágenes tienen `alt` y los campos tienen `label`.",
+    "Se mencionan al menos tres herramientas con su utilidad."
+   ],
+   "id": "05_ejercicio_UT2"
+  },
+  {
+   "ut": 2,
+   "dificultad": 3,
+   "titulo": "Estilos: de la estructura al diseño",
+   "contexto": "La web debe tener la imagen corporativa (verde oliva) y adaptarse al móvil.",
+   "tareas": [
+    "Explica tres ventajas de las hojas de estilo y por qué es mejor un fichero externo que el atributo `style`.",
+    "Crea `estilo.css` con selectores de etiqueta, clase, id y descendiente; cabecera verde, tarjetas con borde redondeado y tabla con bordes.",
+    "Añade una consulta de medios (`@media`) para pantallas de menos de 600 px y explica la especificidad con un ejemplo.",
+    "Valida el HTML y el CSS con las herramientas del W3C y corrige lo que aparezca."
+   ],
+   "entrega": "`estilo.css`, capturas en escritorio y móvil, y el informe de validación.",
+   "ce": [
+    "RA2:f",
+    "RA2:g",
+    "RA2:h"
+   ],
+   "pista": "Las reglas se aplican según su especificidad y, a igualdad, la última gana.",
+   "aceptacion": [
+    "Hay al menos un selector de cada tipo.",
+    "La página cambia de aspecto en pantallas estrechas.",
+    "El validador de CSS no muestra errores."
+   ],
+   "id": "06_ejercicio_UT2"
+  },
+  {
+   "ut": 2,
+   "dificultad": 4,
+   "titulo": "Noticias de la almazara: sindicación",
+   "contexto": "La cooperativa publica noticias (cosecha, ofertas) y quiere que los usuarios puedan suscribirse.",
+   "tareas": [
+    "Describe cómo funciona la sindicación (feed, lector, intervalos) y compara RSS y Atom.",
+    "Escribe un feed RSS 2.0 con tres noticias (`channel`, `item`, `pubDate`) y compruébalo con un analizador.",
+    "Anuncia el feed en la cabecera de `index.html` y enumera cuatro ámbitos de aplicación de la sindicación."
+   ],
+   "entrega": "`noticias.xml` y la etiqueta `link` añadida.",
+   "ce": [
+    "RA2:i",
+    "RA2:j"
+   ],
+   "pista": "El feed es XML: debe estar bien formado.",
+   "aceptacion": [
+    "El feed está bien formado y tiene tres `item`.",
+    "La cabecera usa `rel=\"alternate\"` con `type=\"application/rss+xml\"`."
+   ],
+   "id": "07_ejercicio_UT2"
+  },
+  {
+   "ut": 3,
+   "dificultad": 1,
+   "titulo": "Primeros pasos con JavaScript y el DOM",
+   "contexto": "La web de la almazara tendrá comportamiento propio en el navegador.",
+   "tareas": [
+    "Enumera los lenguajes de script de cliente y sus estándares (ECMAScript). Explica qué es el DOM.",
+    "En `material/carta.html` escribe un script con variables, un `if`, un bucle y una función que calcule el precio medio de la carta y lo muestre en la consola.",
+    "Selecciona con `getElementById`, `querySelector` y `querySelectorAll` el título, el primer producto y todos los productos de más de 8 euros (`data-precio`)."
+   ],
+   "entrega": "El script y las capturas de la consola.",
+   "ce": [
+    "RA3:a",
+    "RA3:b",
+    "RA3:c"
+   ],
+   "pista": "Usa las herramientas del desarrollador (F12) para probar los selectores.",
+   "aceptacion": [
+    "La consola muestra el precio medio correcto.",
+    "Los selectores devuelven los elementos esperados."
+   ],
+   "id": "08_ejercicio_UT3"
+  },
+  {
+   "ut": 3,
+   "dificultad": 2,
+   "titulo": "Carrito dinámico",
+   "contexto": "La tienda web debe permitir añadir y quitar productos de un carrito sin recargar la página.",
+   "tareas": [
+    "Al pulsar «Añadir» crea un `<li>` con el producto y su precio (`createElement`, `textContent`, `append`); evita `innerHTML` con datos externos y explica el riesgo.",
+    "Cada elemento tendrá un botón «Quitar» que lo elimine (`remove()`), usando delegación de eventos en la lista.",
+    "Muestra el total y marca con una clase CSS (no con `style` en línea) los artículos caros; cambia el color del total desde el script.",
+    "Prueba el comportamiento con jsdom o en el navegador y describe el resultado."
+   ],
+   "entrega": "`carrito.html` con el script y una captura del resultado.",
+   "ce": [
+    "RA3:d",
+    "RA3:e",
+    "RA3:f"
+   ],
+   "pista": "Con delegación de eventos un solo oyente atiende los botones de todos los elementos.",
+   "aceptacion": [
+    "Se pueden añadir y quitar productos sin recargar.",
+    "El total se actualiza.",
+    "No se usa `innerHTML` con texto introducido por el usuario."
+   ],
+   "ampliacion": [
+    "Guarda el carrito en `localStorage` y recupéralo al recargar."
+   ],
+   "id": "09_ejercicio_UT3"
+  },
+  {
+   "ut": 4,
+   "dificultad": 1,
+   "titulo": "Por qué y con qué se define un documento",
+   "contexto": "La almazara recibirá pedidos de 15 distribuidores y quiere asegurarse de que todos usan el mismo formato.",
+   "tareas": [
+    "Explica por qué conviene una descripción formal del documento y qué errores evita.",
+    "Compara DTD, XML Schema, RELAX NG y Schematron (sintaxis, tipos, espacios de nombres, expresividad) e indica cuál elegirías.",
+    "Analiza `material/pedido.dtd` y explica `+`, `?`, `*`, `#PCDATA`, `ATTLIST`, `#REQUIRED` e `ID`."
+   ],
+   "entrega": "Las tres respuestas y la tabla comparativa.",
+   "ce": [
+    "RA4:a",
+    "RA4:b",
+    "RA4:c"
+   ],
+   "pista": "Una DTD no puede expresar tipos de datos como «número positivo».",
+   "aceptacion": [
+    "La tabla compara al menos cuatro tecnologías.",
+    "La explicación de la DTD cubre cardinalidad y atributos."
+   ],
+   "id": "10_ejercicio_UT4"
+  },
+  {
+   "ut": 4,
+   "dificultad": 2,
+   "titulo": "Un contrato XSD para los pedidos",
+   "contexto": "Cada pedido tiene fecha, cliente (NIF), líneas con producto, cantidad (entero > 0) y precio (decimal > 0).",
+   "tareas": [
+    "Escribe `pedido.xsd` con tipos propios (patrón del NIF, enteros positivos, decimales) y claves únicas.",
+    "Valida `material/pedido.xml` con `xmllint --schema` y con un pequeño programa en Python (lxml).",
+    "Provoca tres errores diferentes (cantidad cero, NIF incorrecto, línea sin producto), observa los mensajes y corrígelos.",
+    "Asocia el esquema al documento (`xsi:noNamespaceSchemaLocation`) y explica qué ocurre si la ruta no existe."
+   ],
+   "entrega": "`pedido.xsd`, el programa y el registro de los tres errores.",
+   "ce": [
+    "RA4:d",
+    "RA4:e",
+    "RA4:f",
+    "RA4:g"
+   ],
+   "pista": "Los mensajes de error citan la línea y la restricción que falla.",
+   "aceptacion": [
+    "`xmllint --noout --schema pedido.xsd pedido.xml` indica que valida.",
+    "Los tres errores producen mensajes distintos.",
+    "El programa informa de válido/no válido."
+   ],
+   "id": "11_ejercicio_UT4"
+  },
+  {
+   "ut": 4,
+   "dificultad": 3,
+   "titulo": "Contrato alternativo con RELAX NG",
+   "contexto": "Un distribuidor prefiere RELAX NG porque su sintaxis le resulta más sencilla.",
+   "tareas": [
+    "Escribe `pedido.rng` equivalente al XSD y valida el mismo documento.",
+    "Compara ambos contratos: qué restricciones pudiste expresar en cada uno y cuál te pareció más legible.",
+    "Añade una regla que ninguno de los dos expresa bien (por ejemplo, que el total coincida con la suma de las líneas) y propón cómo comprobarla (Schematron o código)."
+   ],
+   "entrega": "`pedido.rng` y una reflexión de media página.",
+   "ce": [
+    "RA4:c",
+    "RA4:d",
+    "RA4:e"
+   ],
+   "pista": "En RELAX NG los patrones se combinan con `element`, `attribute`, `choice` y `oneOrMore`.",
+   "aceptacion": [
+    "El documento válido pasa y el inválido falla.",
+    "La reflexión nombra al menos una limitación de XSD y otra de RELAX NG."
+   ],
+   "id": "12_ejercicio_UT4"
+  },
+  {
+   "ut": 5,
+   "dificultad": 1,
+   "titulo": "Convertir sin duplicar",
+   "contexto": "La almazara guarda su catálogo en XML y necesita una web, un CSV para contabilidad y un PDF para imprimir.",
+   "tareas": [
+    "Explica por qué es mejor convertir desde una única fuente que mantener tres copias y enumera cuatro ámbitos de aplicación de las conversiones.",
+    "Describe cómo funciona XSLT (documento origen, hoja de estilos, procesador, documento resultado) y compáralo con XQuery y con DOM/SAX.",
+    "Enumera herramientas de conversión (Saxon, xsltproc, Pandoc, LibreOffice, Apache FOP) y elige una para cada caso."
+   ],
+   "entrega": "Un documento con las tres respuestas.",
+   "ce": [
+    "RA5:a",
+    "RA5:b",
+    "RA5:c",
+    "RA5:f"
+   ],
+   "pista": "Piensa en qué ocurre cuando cambia un precio.",
+   "aceptacion": [
+    "La respuesta justifica la fuente única.",
+    "Cada herramienta se asocia a un formato de entrada y de salida."
+   ],
+   "id": "13_ejercicio_UT5"
+  },
+  {
+   "ut": 5,
+   "dificultad": 2,
+   "titulo": "Del catálogo XML a la web y al CSV",
+   "contexto": "Trabajas con `material/catalogo.xml` (aceites, formatos y precios).",
+   "tareas": [
+    "Selecciona con XPath los aceites ecológicos, los de más de 10 € y el precio del último elemento.",
+    "Escribe `catalogo.xsl` que genere una página HTML con una tabla ordenada por precio y marque como «agotado» el producto sin existencias.",
+    "Escribe otra hoja que produzca un CSV con `producto;formato;precio`.",
+    "Aplica ambas hojas con Saxon o xsltproc y abre el HTML en el navegador."
+   ],
+   "entrega": "Las dos hojas XSLT, el HTML y el CSV generados.",
+   "ce": [
+    "RA5:d",
+    "RA5:e",
+    "RA5:g"
+   ],
+   "pista": "Usa `xsl:text` con `&#10;` para producir saltos de línea en la salida de texto.",
+   "aceptacion": [
+    "La tabla está ordenada por precio.",
+    "El CSV tiene una fila por producto y cabecera.",
+    "El producto sin existencias aparece marcado."
+   ],
+   "id": "14_ejercicio_UT5"
+  },
+  {
+   "ut": 5,
+   "dificultad": 3,
+   "titulo": "Informes con XQuery",
+   "contexto": "La dirección quiere informes sobre `material/catalogo.xml` y `material/pedidos.xml`.",
+   "tareas": [
+    "Con XQuery (FLWOR) obtén los productos de más de 10 €, ordenados por precio descendente.",
+    "Calcula el total vendido por producto uniendo `pedidos.xml` con `catalogo.xml`.",
+    "Construye un XML nuevo `informe` con el top 3 de productos y conviértelo a HTML con una hoja XSLT.",
+    "Compara cuándo usarías XQuery y cuándo XSLT."
+   ],
+   "entrega": "Las consultas, el XML del informe y su HTML.",
+   "ce": [
+    "RA5:d",
+    "RA5:e",
+    "RA5:g"
+   ],
+   "pista": "La cláusula `group by` agrupa; también puedes agrupar con funciones como `distinct-values`.",
+   "aceptacion": [
+    "El total por producto coincide con el cálculo manual.",
+    "El informe se genera sin intervención manual.",
+    "La comparación cita el tipo de resultado y el enfoque (plantillas frente a consulta)."
+   ],
+   "id": "15_ejercicio_UT5"
+  },
+  {
+   "ut": 6,
+   "dificultad": 1,
+   "titulo": "Elegir dónde y cómo guardar la información",
+   "contexto": "La almazara debe decidir cómo almacenar catálogo, pedidos y mediciones de los depósitos.",
+   "tareas": [
+    "Compara ficheros XML/JSON, base de datos relacional y base de datos nativa (XML o documental): estructura, consulta, concurrencia y tamaño recomendado.",
+    "Evalúa ventajas e inconvenientes de guardar documentos JSON/XML dentro de una base de datos frente a normalizar en tablas.",
+    "Elige la tecnología más eficiente para: facturas, fichas de producto con atributos variables, catálogo con transformaciones XSLT y lecturas de sensores de temperatura.",
+    "Relaciona XPath, XQuery, XSLT, JSONPath, `jq`, MongoDB Shell, BaseX y DataGrip con su función."
+   ],
+   "entrega": "Una tabla comparativa y las elecciones justificadas.",
+   "ce": [
+    "RA6:a",
+    "RA6:b",
+    "RA6:c",
+    "RA6:d",
+    "RA6:h"
+   ],
+   "pista": "No hay una tecnología mejor en general: depende de la forma de los datos y de cómo se consultan.",
+   "aceptacion": [
+    "La tabla distingue estructura y consulta de cada opción.",
+    "Cada elección se justifica con una característica de los datos."
+   ],
+   "id": "16_ejercicio_UT6"
+  },
+  {
+   "ut": 6,
+   "dificultad": 2,
+   "titulo": "Consultar y generar documentos desde MySQL",
+   "contexto": "Cargas en MySQL las tablas de `material/almazara.sql` (clientes, productos, pedidos).",
+   "tareas": [
+    "Consulta los productos con menos de 20 existencias y los clientes que más han comprado (JOIN y GROUP BY).",
+    "Guarda las fichas de producto en una columna JSON, consúltalas con `->>` y crea un índice mediante una columna generada.",
+    "Genera con SQL un documento JSON anidado (clientes con sus pedidos) y, con un programa en Python, el XML equivalente.",
+    "Consulta el XML resultante con XPath y XQuery."
+   ],
+   "entrega": "Las consultas, el JSON y el XML generados.",
+   "ce": [
+    "RA6:e",
+    "RA6:f",
+    "RA6:g"
+   ],
+   "pista": "`JSON_OBJECT` y `JSON_ARRAYAGG` construyen documentos JSON directamente desde SQL.",
+   "aceptacion": [
+    "El JSON anidado refleja la relación cliente→pedidos.",
+    "El índice sobre la columna generada se usa (`EXPLAIN`).",
+    "El XML contiene los mismos datos que el JSON."
+   ],
+   "id": "17_ejercicio_UT6"
+  },
+  {
+   "ut": 6,
+   "dificultad": 3,
+   "titulo": "Catálogo documental en MongoDB",
+   "contexto": "La almazara quiere un catálogo flexible donde cada producto tenga atributos distintos.",
+   "tareas": [
+    "Inserta con `mongosh` los productos de `material/productos.json` (con etiquetas y subdocumentos).",
+    "Consulta por etiqueta, por rango de precio y por existencia de un campo; actualiza un precio y añade un campo nuevo a un solo producto.",
+    "Calcula con una agregación el valor del inventario por categoría y crea un índice para la consulta por nombre.",
+    "Explica qué es una base de datos nativa y cuándo la elegirías frente a la relacional."
+   ],
+   "entrega": "Los comandos ejecutados y su salida.",
+   "ce": [
+    "RA6:h",
+    "RA6:i"
+   ],
+   "pista": "En MongoDB las consultas se expresan con documentos y operadores `$gt`, `$in`, `$exists`.",
+   "aceptacion": [
+    "Las consultas devuelven los productos esperados.",
+    "La agregación suma `precio × existencias` por categoría.",
+    "El índice aparece en `getIndexes()`."
+   ],
+   "id": "18_ejercicio_UT6"
+  },
+  {
+   "ut": 7,
+   "dificultad": 1,
+   "titulo": "Conocer y elegir un ERP",
+   "contexto": "La almazara se plantea sustituir sus hojas de cálculo por un sistema de gestión empresarial.",
+   "tareas": [
+    "Identifica los principales tipos de sistemas (ERP, CRM, SCM, BI) y ejemplos libres y propietarios.",
+    "Enumera ventajas e inconvenientes de un ERP frente a hojas de cálculo sueltas.",
+    "Compara Odoo, Dolibarr y ERPNext (módulos, licencia, coste, comunidad, hospedaje) y recomienda uno para una cooperativa de 15 socios."
+   ],
+   "entrega": "Una tabla comparativa y una recomendación argumentada.",
+   "ce": [
+    "RA7:a",
+    "RA7:b",
+    "RA7:c"
+   ],
+   "pista": "La mejor opción depende del tamaño, el presupuesto y el soporte técnico disponible.",
+   "aceptacion": [
+    "La tabla compara al menos cinco criterios.",
+    "La recomendación se apoya en las necesidades de la cooperativa."
+   ],
+   "id": "19_ejercicio_UT7"
+  },
+  {
+   "ut": 7,
+   "dificultad": 2,
+   "titulo": "Implantar, asegurar y explotar un ERP",
+   "contexto": "Se ha decidido probar Odoo con datos ficticios de la almazara.",
+   "tareas": [
+    "Escribe el `docker-compose.yml` de Odoo con PostgreSQL y datos persistentes e indica los pasos para crear la base de datos y el administrador.",
+    "Elabora la lista de tareas de configuración inicial y administración (empresa, impuestos, usuarios, módulos, copias).",
+    "Define una matriz de permisos por roles (vendedor, contable, administrador) y verifícala con un programa que compruebe que se deniega lo no autorizado.",
+    "A partir de `material/facturas.csv` obtén un informe de facturación por cliente y por mes, y exporta una selección a CSV para otro sistema, descartando las filas erróneas.",
+    "Redacta el índice de un manual de explotación (copias, restauración, incidencias, cambios)."
+   ],
+   "entrega": "El `docker-compose.yml`, el programa de permisos, el informe y el índice del manual.",
+   "ce": [
+    "RA7:d",
+    "RA7:e",
+    "RA7:f",
+    "RA7:g",
+    "RA7:h",
+    "RA7:i"
+   ],
+   "pista": "El mínimo privilegio significa que lo no concedido está denegado por defecto.",
+   "aceptacion": [
+    "El YAML es válido y define volúmenes.",
+    "El programa deniega las acciones no permitidas.",
+    "El informe suma correctamente por cliente y mes.",
+    "Las filas inválidas se descartan y se cuentan."
+   ],
+   "id": "20_ejercicio_UT7"
+  }
+ ]
+}

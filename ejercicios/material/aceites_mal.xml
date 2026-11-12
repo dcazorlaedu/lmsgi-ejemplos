@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Catálogo de aceites con errores de sintaxis (ejercicio 02) -->
+<almazara>
+  <aceite id=a1 variedad="picual">
+    <nombre>Virgen extra Picual
+    <precio moneda="EUR">8.90</precio>
+  </aceite>
+  <aceite id="a2" variedad="arbequina">
+    <nombre>Virgen extra Arbequina</nombre>
+    <precio moneda="EUR">9.50</Precio>
+    <nota>Edición limitada & numerada</nota>
+  </aceite>
+</almazara>

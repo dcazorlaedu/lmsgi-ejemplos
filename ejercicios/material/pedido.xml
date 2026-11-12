@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedidos>
+  <pedido id="p001" fecha="2026-11-02">
+    <cliente nif="12345678Z">Restaurante El Cruce</cliente>
+    <linea cantidad="12" precio="8.90"><producto>Picual 500 ml</producto></linea>
+    <linea cantidad="6" precio="15.80"><producto>Picual 1 l</producto><nota>Con caja de regalo</nota></linea>
+  </pedido>
+  <pedido id="p002" fecha="2026-11-05">
+    <cliente nif="87654321X">Hotel Sierra</cliente>
+    <linea cantidad="24" precio="9.50"><producto>Arbequina 500 ml</producto></linea>
+  </pedido>
+</pedidos>

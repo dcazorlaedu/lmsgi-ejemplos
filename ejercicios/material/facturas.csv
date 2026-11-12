@@ -1,0 +1,10 @@
+factura;fecha;cliente;concepto;importe
+F-001;2026-09-14;Restaurante El Cruce;Aceite Picual;320.50
+F-002;2026-09-30;Hotel Sierra;Aceite Arbequina;228.00
+F-003;2026-10-05;Colegio San José;Aceite Picual;267.00
+F-004;2026-10-18;Restaurante El Cruce;Aceite Ecológico;96.00
+F-005;2026-10-22;Bar La Plaza;Aceite Picual 1 l;158.00
+F-006;2026-11-02;Hotel Sierra;Pack degustación;130.00
+F-007;2026-11-05;;Aceite Arbequina;57.00
+F-008;2026-11-08;Bar La Plaza;Aceite Arbequina;abc
+F-009;2026-11-09;Colegio San José;Aceite Ecológico;96.00

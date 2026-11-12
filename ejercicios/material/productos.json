@@ -1,0 +1,6 @@
+[
+  {"nombre":"Picual 500 ml","categoria":"virgen extra","precio":8.9,"existencias":120,"etiquetas":["clásico","cosecha 2026"],"origen":{"municipio":"Totana","finca":"La Umbría"}},
+  {"nombre":"Arbequina 500 ml","categoria":"virgen extra","precio":9.5,"existencias":85,"etiquetas":["suave"],"origen":{"municipio":"Totana","finca":"El Cabezo"}},
+  {"nombre":"Ecológico 1 l","categoria":"ecológico","precio":24.0,"existencias":15,"etiquetas":["ecológico","edición limitada"],"certificado":"ES-ECO-001"},
+  {"nombre":"Pack degustación","categoria":"packs","precio":32.5,"existencias":30,"contenido":["Picual 250 ml","Arbequina 250 ml","Ecológico 250 ml"]}
+]

@@ -1,0 +1,9 @@
+<!ELEMENT pedidos (pedido+)>
+<!ELEMENT pedido (cliente, linea+)>
+<!ATTLIST pedido id ID #REQUIRED fecha CDATA #REQUIRED>
+<!ELEMENT cliente (#PCDATA)>
+<!ATTLIST cliente nif CDATA #REQUIRED>
+<!ELEMENT linea (producto, nota?)>
+<!ATTLIST linea cantidad CDATA #REQUIRED precio CDATA #REQUIRED>
+<!ELEMENT producto (#PCDATA)>
+<!ELEMENT nota (#PCDATA)>

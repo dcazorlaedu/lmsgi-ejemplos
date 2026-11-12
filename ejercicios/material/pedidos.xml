@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedidos>
+  <pedido cliente="Restaurante El Cruce"><linea ref="a1" cantidad="12"/><linea ref="a3" cantidad="6"/></pedido>
+  <pedido cliente="Hotel Sierra"><linea ref="a2" cantidad="24"/></pedido>
+  <pedido cliente="Colegio San José"><linea ref="a1" cantidad="30"/><linea ref="a4" cantidad="4"/></pedido>
+  <pedido cliente="Bar La Plaza"><linea ref="a3" cantidad="10"/><linea ref="a2" cantidad="6"/></pedido>
+</pedidos>

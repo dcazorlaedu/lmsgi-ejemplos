@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedido>
+  <cliente>
+    <nombre>Restaurante El Cruce</nombre>
+    <ciudad>Alhama de Murcia</ciudad>
+  </cliente>
+  <transporte>
+    <nombre>Transportes Guadalentín</nombre>
+    <matricula>1234-ABC</matricula>
+  </transporte>
+</pedido>
